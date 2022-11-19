@@ -1,38 +1,308 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  height: fit-content;
+  background: url("../src/images/bg-desktop-dark.jpg");
+  background-color: var(--Very-Dark-Blue);
+  background-repeat: no-repeat;
+  background-size: inherit;
   display: flex;
   flex-direction: column;
+  color: var(--Light-Grayish-Blue);
+  justify-content: flex-start;
+  align-items: center;
+ 
+}
+.light-theme {
+ 
+  background: url("../src/images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-color: var(--VeryLight-Gray);
+  background-size: inherit;
+  color: var(--Very-Dark-Grayish-Blue);
+}
+h1 {
+  color: var(--VeryLight-Gray); 
+}
+
+/*TODO*/
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  width: 545.4px;
+  margin-bottom: 1.5em;
+  cursor: pointer;
+ 
+}
+
+
+/*TODO DRAG*/
+.dragging {
+  border-radius: .5em;
+  opacity: .5 ;
+  
+}
+
+.droppeable{
+  transform: translateY(10px);
+  opacity: .5;
+}
+/*TODO-TOP DESIGN*/
+/*Top Layout*/
+.todo-top-container {
+  margin-top: 55px;
+}
+.todo-top-design {
+  display: flex;
+  justify-content: space-between;
+}
+.top-design-title {
+  letter-spacing: 1rem;
+  margin-bottom: 1.25em;
+}
+.top-design-modeBtn {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+/*Todo Create*/
+.top-todo-create {
+  display: flex;
+  box-sizing: border-box;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  padding: 1em;
+  margin-bottom: 1.5em;
+  border-radius: .25em;
+}
+.header-light {
+  background-color: var(--VeryLight-Gray);
+  
+}
+.top-todo-create button {
+  background-color: transparent;
+  border: 1px solid var(--Dark-Grayish-Blue);
+  border-radius: 50%;
+  margin-right: 1em;
+  min-width: 1.5em;
+  max-width: 20px;
+  min-height: 1.5em;
+  max-height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.top-todo-create button img {
+  max-width: 100%;
+  height: auto;
+  max-height: 18px;
+  visibility: hidden;
+}
+
+.top-todo-create input {
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+}
+::placeholder {
+  color: var(--Dark-Grayish-Blue);
+}
+
+
+/*TODO-BODY*/
+/*Todo List*/
+
+/*Todo*/
+.todo-body-container :first-child {
+  border-radius: .25em .25em 0 0;
+}
+.todo {
+  z-index: -1;
+  max-width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  padding: 1em;
+  border-bottom: 1px solid var(--Very-Dark-Grayish-Blue);
+  justify-content: space-between;
+ 
+}
+.todo-light {
+  background-color: var(--VeryLight-Gray);
+  border-bottom: 1px solid var(--Light-Grayish-Blue);
+  box-shadow: 0px 1em  1em var(--Light-Grayish-Blue);
+  
+}
+.todo > * {
+  margin: 0;
+}
+.todo p {
+  display: inline-flex;
+  cursor: pointer;
+  margin-right: auto;
+  word-break: break-all; /*https://stackoverflow.com/questions/46453418/text-breaking-out-of-flexbox-container*/
+  align-self: center;
+}
+.todo-cross-icon {
+  visibility: hidden;
+  width: 1em;
+  height: 1em;
+  align-self: center;
+}
+.todo:hover > .todo-cross-icon {
+  visibility: visible;
+  cursor: pointer;
+}
+.todo button {
+  background-color: transparent;
+  border: 1px solid var(--Dark-Grayish-Blue);
+  border-radius: 50% !important;
+  margin-right: 1em;
+  min-width: 1.5em;
+  max-width: 20px;
+  min-height: 1.5em;
+  max-height: 20px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  cursor: pointer;
+  align-self: center;
+}
+.todo button img {
+  max-width: 100%;
+  height: auto;
+  max-height: 18px;
+  visibility: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+/*TODO-BOTTOM DESIGN*/
+
+.todo-bottom-container {
+  display: grid;
+  justify-content: space-between;
+  grid-template-areas: 
+  "left center right";
+  box-sizing: border-box;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  padding: 0 1em;
+  color: var(--Dark-Grayish-Blue);
+  font-size: 1em;
+  border-radius: 0 0 .25em .25em;
+}
+.todo-bottom-container > div p:hover{
+  color: var(--Very-Light-Grayish-Blue);
+}
+.todo-bottom-container-light {
+  background-color: var(--VeryLight-Gray);
+  box-shadow: 0px 1em  1em var(--Very-Light-Grayish-Blue);
+}
+.todo-bottom-container-light > div p:hover {
+  color: var(--Very-Dark-Blue);
+}
+.bottom-items  {
+  padding: auto;
+  min-width: 0;
+  cursor: pointer;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+}
+.bottom-items-light {
+  background-color: var(--VeryLight-Gray);
+}
+.active-class {
+  color: var(--Bright-Blue);
+}
+.remaining {
+  grid-area: left;
+  cursor:default
+}
+.status {
+  grid-area: center;
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+  
+}
+.clear-completed {
+  grid-area: right;
+  text-align: end;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+/*TODO TEXT INFO*/
+.todo-text-info {
+  color: var(--Dark-Grayish-Blue);
+}
+
+@media (max-width: 800px) {
+  .todo-container {
+    max-width: 66%;
+    width: fit-content;
+    
   }
-  to {
-    transform: rotate(360deg);
+  .todo-bottom-container {
+    grid-template-areas: 
+    "left right"
+    "center center" 
+     ;
+    row-gap: 1em;
+    padding: 0em;
+    justify-content: stretch;
+    background-color: transparent;
+    box-sizing: border-box;
+  }
+  .bottom-items {
+    padding: 0em 1em;
+    
+   }
+   .light-theme .todo-bottom-left, .light-theme .todo-bottom-right {
+    box-shadow: 0px 1em 10px var(--Very-Light-Grayish-Blue);
+   }
+}
+
+@media (max-width: 375px) {
+  .App {
+    background: url("../src/images/bg-mobile-dark.jpg");
+    background-repeat: no-repeat;
+    background-color: var(--Very-Dark-Blue);;
+    font-size: 14px;
+  }
+  .light-theme {
+    background: url("../src/images/bg-mobile-light.jpg");
+    background-repeat: no-repeat;
+    background-color: var(--VeryLight-Gray);
+    color: var(--Very-Dark-Grayish-Blue);
+    font-size: 14px;
+  }
+
+  .todo-container {
+    max-width: 100%;
+    width: calc(100% - 4em);
+  }
+  .todo-cross-icon {
+    visibility: visible;
+  }
+  .todo-top-container {
+    margin-top: 2em;
+  }
+  .todo-bottom-container {
+    grid-template-areas: 
+    "left right"
+    "center center" 
+     ;
+    row-gap: 1em;
+    padding: 0em;
+    justify-content: stretch;
+    background-color: transparent;
+    box-sizing: border-box;
+  }
+  .bottom-items {
+   padding: 0em 1em;
   }
 }
+
+

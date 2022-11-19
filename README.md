@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Frontend Mentor - Todo app solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### The challenge
 
-### `npm test`
+Users should be able to:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Add new todos to the list
+- Mark todos as complete
+- Delete todos from the list
+- Filter by all/active/complete todos
+- Clear all completed todos
+- Toggle light and dark mode
+- **Bonus**: Drag and drop to reorder items on the list
 
-### `npm run build`
+### Screenshot
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Desktop 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![](./todo-app-main/public/design/Desktop%20Result%20(2).png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Mobile
 
-### `npm run eject`
+<img src="./todo-app-main/public/design/Mobile%20result%20(2).png" width="375" />
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Links
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Live Site URL: [Vercel](https://your-live-site-url.com)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## My process
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Built with
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- HTML
+- CSS - Flexbox - Grid
+- Javascript
+- [React](https://reactjs.org/) - [Redux](https://es.redux.js.org/)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### What I learned
 
-### Analyzing the Bundle Size
+The most difficult thing about this project was to have a correct structure for tracking the states for the tasks that would be displayed. At first I downplayed this, but later, when I was working on the drag-and-drop I was struggling a little bit when I was re-ordering the whole, and this, because I had to keep in mind that when working with two states for everything (original list and mutable list) the second state depends on the first, so changing in the original state or not doing so will affect the copy state.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This is a code snippet for the reeorder logic, where I needed to change the order in both, the original and copy state, to avoid strange behavior, but it seems to be a bit heavy to be in the reducer, but it is the current solution.
 
-### Making a Progressive Web App
+```js
+case REEORDER_LIST: 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+            let newTodos = [...state.todos];
+            let newShowedList = [...state.showedList];
+            let todoFirstItem = state.todos.find(todo => todo.id === action.payload.firstItem);
+            let todolastItem = state.todos.find(todo => todo.id === action.payload.lastItem);
+            let firstTodoIndex = state.todos.findIndex(todo=> todo.id === action.payload.firstItem);
+            let lastTodoIndex = state.todos.findIndex(todo=> todo.id === action.payload.lastItem);
+            let firstShowedIndex = state.showedList.findIndex(todo=> todo.id === action.payload.firstItem);
+            let lastShowedIndex  = state.showedList.findIndex(todo=> todo.id === action.payload.lastItem);
+   
+            newTodos[firstTodoIndex] = todolastItem;
+            newTodos[lastTodoIndex] = todoFirstItem; 
+            newShowedList[firstShowedIndex] = todolastItem;
+            newShowedList[lastShowedIndex] = todoFirstItem;
+     
+            return {
+                ...state,
+                showedList: newShowedList,
+                todos: newTodos
+            };
+```
+In CSS i keep with me a new concept: the break-word. Have knowledge of this can save you from many problems of content overflowing from the container, specially text. The break-all propertie let each word have break between lines. Which allows text to shrink along with the container.
 
-### Advanced Configuration
+```css
+.todo p {
+  word-break: break-all;
+  ...
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### Continued development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- For this project adding local storage to be capable of remind some todo's could be a good idea and will be the next step to focus and improve the App.
 
-### `npm run build` fails to minify
+- Also, i think there's some code than can be refactored. For example, the reducer, look a little heavy. So, that's other point for improving.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Useful resources
+
+- [Drag and Drop ](https://www.w3schools.com/html/html5_draganddrop.asp) - This give me a good base for understanding how "Drag and Drop APÏ" works. Simple and concise.
+
+
+## Author
+
+- Frontend Mentor - [juandavid015](https://www.frontendmentor.io/profile/juandavid015)
+

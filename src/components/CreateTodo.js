@@ -32,14 +32,14 @@ export default function CreateTodo () {
         setInput({input: ""})    
     }
     
-    let checked = <button onClick={(e)=> handleSubmit(e)} 
+    let checked = <button onClick={(e)=> handleSubmit(e)} id='check-btn' title="check task"
     style={{backgroundImage: "linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%))" ,
     border: "0px solid transparent"}}><img alt ="icon check" src={iconCheck} style={{ visibility: "visible"}}/></button>
  
     return (
         <form className={`top-todo-create ${theme ? "": "header-light"}`} onSubmit={(e)=> handleSubmit(e)}>
             
-               {check ? checked: <button onClick={(e)=> handleSubmit(e)}></button>}
+               {check ? checked: <button onClick={(e)=> handleSubmit(e)} id='check-btn' title="check task"></button>}
             
             <input id= "create-input-text"type="text" placeholder="Create a new todo..." value= {input.input} onChange={(e)=> handleChange(e)}/>
         </form>

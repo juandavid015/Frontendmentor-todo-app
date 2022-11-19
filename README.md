@@ -36,11 +36,11 @@ Users should be able to:
 
 Desktop 
 
-![](./todo-app-main/public/design/Desktop%20Result%20(2).png)
+![](./public/design/Desktop%20Result%20(2).png)
 
 Mobile
 
-<img src="./todo-app-main/public/design/Mobile%20result%20(2).png" width="375" />
+<img src="./public/design/Mobile%20result%20(2).png" width="375" />
 
 
 ### Links
